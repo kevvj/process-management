@@ -3,18 +3,33 @@ public class process {
 
     String description;
     String name;
-    String priority;
+    int priority;
     String processId;
+    String user;
 
-    public process(String description, String name, String priority, String processId) {
+    public process(String description, String name, String processId, String user) {
         this.description = description;
         this.name = name;
-        this.priority = priority;
         this.processId = processId;
+        this.user = user;
+
+        priority = setPriority();
+    }
+
+    final int setPriority(){
+        int pr = 0;
+        if(user.toLowerCase().contains("system")){
+            pr = 1;
+        }
+        return pr;
     }
 
     public String getProcess() {
-        return "Descripción: " + description + ", Nombre: " + name + ", Prioridad: " + priority + ", ID Proceso: " + processId;
+        return "Descripción: " + description + ", Nombre: " + name + ", Prioridad: " + priority + ", ID Proceso: " + processId + ", Usuario" + user;
+    }
+
+    public void insertProcess(){
+        
     }
 
 }

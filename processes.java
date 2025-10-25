@@ -1,5 +1,6 @@
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class processes {
@@ -11,9 +12,9 @@ public class processes {
         process[] pl = new process[L];
         int j = 0;
         try {
-            Process p = Runtime.getRuntime().exec("wmic process get ProcessId,Name,Description,Priority,UserModeTime"); // ejecutar el comando tasklist(devuelve la lista de procesos activos)
+            Process p = Runtime.getRuntime().exec("tasklist /V /FO CSV");
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream())); // leemos el texto que genera el comando tasklist
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
             while (j < L) {
                 String line = reader.readLine();
@@ -22,17 +23,18 @@ public class processes {
                     break;
                 }
 
-                String[] info = line.trim().replaceAll(" +", " ").split(" ");
+                String[] info = line.replace("\"", "").split(",");
 
                 if (info.length >= 5) {
+                    String name = info[0];
+                    String processId = info[1];
+                    String user = info[6];
                     String description = info[0];
-                    String name = info[1];
-                    String priority = info[2];
-                    String processId = info[3];
 
-                    pl[j] = new process(description, name, priority, processId);
-
+                    pl[j] = new process(description, name, processId, user);
+                    System.out.println(info[6]);
                     j = j + 1;
+
                 }
 
             }
@@ -45,4 +47,5 @@ public class processes {
 
         return Arrays.copyOf(pl, j);
     }
+
 }

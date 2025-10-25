@@ -1,6 +1,4 @@
-
 import java.util.Scanner;
-
 public class controller {
 
     processes p;
@@ -25,6 +23,8 @@ public class controller {
         for (process cap_ : cap) {
             System.out.println(cap_.getProcess());
         }
+
+        
 
     }
 }
