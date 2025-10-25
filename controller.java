@@ -1,11 +1,13 @@
 import java.util.Scanner;
-public class controller {
+public class Controller {
 
     processes p;
 
-    public controller() {
+    public Controller() {
         p = new processes();
     }
+    
+    @SuppressWarnings("resource")
 
     public void iniciar() {
         Scanner sc = new Scanner(System.in);
@@ -23,8 +25,6 @@ public class controller {
         for (process cap_ : cap) {
             System.out.println(cap_.getProcess());
         }
-
-        
 
     }
 }
