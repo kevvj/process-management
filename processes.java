@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,28 +18,26 @@ public class processes {
             String[] cmd = {"tasklist", "/V", "/FO", "CSV"};
 
             Process p = Runtime.getRuntime().exec(cmd);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+            while (j < L) {
+                String line = reader.readLine();
 
-                while (j < L) {
-                    String line = reader.readLine();
+                if (line == null) {
+                    break;
+                }
 
-                    if (line == null) {
-                        break;
-                    }
+                String[] info = line.replace("\"", "").split(",");
 
-                    String[] info = line.replace("\"", "").split(",");
+                if (info.length >= 5) {
+                    String name = info[0];
+                    String processId = info[1];
+                    String user = info[6];
+                    String description = info[0];
 
-                    if (info.length >= 5) {
-                        String name = info[0];
-                        String processId = info[1];
-                        String user = info[6];
-                        String description = info[0];
-
-                        pl[j] = new process(description, name, processId, user);
-                        System.out.println(info[6]);
-                        j = j + 1;
-                    }
+                    pl[j] = new process(description, name, processId, user);
+                    System.out.println(info[6]);
+                    j = j + 1;
                 }
             }
 
