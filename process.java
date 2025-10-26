@@ -28,9 +28,9 @@ public class process {
         return "Descripción: " + description + ", Nombre: " + name + ", Prioridad: " + priority + ", ID Proceso: " + processId + ", Usuario" + user;
     }
 
-    public void insertProcess(){
+    public void insertProcess(int catalog){
         DBConnection db = new DBConnection();
-        db.createProcess(name, user, processId, description, priority);
+        db.createProcess(name, user, processId, description, priority,catalog);
     }
 
 }

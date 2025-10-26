@@ -2,9 +2,11 @@ import java.util.Scanner;
 public class Controller {
 
     processes p;
+    DBConnection db;
 
     public Controller() {
         p = new processes();
+        db = new DBConnection();
     }
     
     @SuppressWarnings("resource")
@@ -13,18 +15,21 @@ public class Controller {
         Scanner sc = new Scanner(System.in);
 
         System.err.println("Escribe el titulo de tu cagada");
-        String texto = sc.nextLine(); 
+        String text = sc.nextLine(); 
 
         System.out.println("Escribe el numero de procesos que quieres imprimir: ");
         int num = sc.nextInt();
 
-        System.err.println("Titulo: " + texto);
+
 
         process[] cap = p.getProcesses(num);
 
+        int catalog = db.createCatalog(num, text);
+
         for (process cap_ : cap) {
             System.out.println(cap_.getProcess());
-            cap_.insertProcess();
+            
+            cap_.insertProcess(catalog);
         }
 
     }

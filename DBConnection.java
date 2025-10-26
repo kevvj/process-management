@@ -25,7 +25,24 @@ public class DBConnection {
 
     }
 
-    public void createProcess(String name, String User, int pid, String description, int priority) {
+    public int createCatalog(int num, String name){
+        String sql = "INSERT INTO catalog (process_catalog, catalog_name) VALUES (?, ?)";
+        conn = setConnection();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, num);
+            stmt.setString(2, name);
+            stmt.executeUpdate();
+            var rs = stmt.getGeneratedKeys();
+            if (rs.next()) return rs.getInt(1);
+            conn.close();
+        } catch (SQLException | NullPointerException e) {
+            System.out.println("error:" + e);
+        }
+        return -1;
+    }
+
+    public void createProcess(String name, String User, int pid, String description, int priority, int catalog_id) {
         String sql = "INSERT INTO process (name, user, pid, description, priority, catalog_id) VALUES (?, ?, ?, ?, ?, ?)";
         conn = setConnection();
         try {
@@ -35,7 +52,7 @@ public class DBConnection {
             stmt.setInt(3, pid);
             stmt.setString(4, description);
             stmt.setInt(5, priority);
-            stmt.setInt(6, 123);
+            stmt.setInt(6, catalog_id);
             stmt.executeUpdate();
             conn.close();
         } catch (SQLException | NullPointerException e) {

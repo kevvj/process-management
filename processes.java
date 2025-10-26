@@ -12,9 +12,6 @@ public class processes {
     public process[] getProcesses(int L) {
         process[] pl = new process[L];
         int j = 0;
-
-        
-
         try {
 
             String[] cmd = {"tasklist", "/V", "/FO", "CSV"};
