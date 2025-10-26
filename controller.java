@@ -24,10 +24,8 @@ public class Controller {
 
         for (process cap_ : cap) {
             System.out.println(cap_.getProcess());
+            cap_.insertProcess();
         }
-
-        DBConnection db = new DBConnection();
-        db.createProcess("ejemplo", "userejemplo", 123, "aaaa", 0);
 
     }
 }

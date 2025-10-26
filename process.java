@@ -4,10 +4,10 @@ public class process {
     String description;
     String name;
     int priority;
-    String processId;
+    int processId;
     String user;
 
-    public process(String description, String name, String processId, String user) {
+    public process(String description, String name, int processId, String user) {
         this.description = description;
         this.name = name;
         this.processId = processId;
@@ -29,7 +29,8 @@ public class process {
     }
 
     public void insertProcess(){
-        
+        DBConnection db = new DBConnection();
+        db.createProcess(name, user, processId, description, priority);
     }
 
 }

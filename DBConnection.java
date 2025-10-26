@@ -44,21 +44,6 @@ public class DBConnection {
 
     }
 
-    public void a() {
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            String sql = "INSERT INTO procesos (nombre, prioridad) VALUES (?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, "explorer.exe");
-            stmt.setInt(2, 1);
-            stmt.executeUpdate();
-            conn.close();
-            System.out.println("Dato insertado");
-        } catch (SQLException | NullPointerException e) {
-            System.out.println("error:" + e);
-        }
-    }
-
     public String getUrl() {
         return url;
     }

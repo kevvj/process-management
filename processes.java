@@ -13,12 +13,15 @@ public class processes {
         process[] pl = new process[L];
         int j = 0;
 
+        
+
         try {
 
             String[] cmd = {"tasklist", "/V", "/FO", "CSV"};
 
             Process p = Runtime.getRuntime().exec(cmd);
             BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            reader.readLine();
 
             while (j < L) {
                 String line = reader.readLine();
@@ -35,8 +38,9 @@ public class processes {
                     String user = info[6];
                     String description = info[0];
 
-                    pl[j] = new process(description, name, processId, user);
-                    System.out.println(info[6]);
+                    int pid = Integer.parseInt(processId);
+
+                    pl[j] = new process(description, name, pid, user);
                     j = j + 1;
                 }
             }
