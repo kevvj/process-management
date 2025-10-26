@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class DBConnection {
 
@@ -17,8 +18,8 @@ public class DBConnection {
         try {
             conn = DriverManager.getConnection(url, user, password);
             return conn;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException | NullPointerException e) {
+            System.out.println("error"+ e);
             return null;
         }
 
@@ -37,7 +38,7 @@ public class DBConnection {
             stmt.setInt(6, 123);
             stmt.executeUpdate();
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException | NullPointerException e) {
             System.out.println("error:" + e);
         }
 
@@ -53,8 +54,8 @@ public class DBConnection {
             stmt.executeUpdate();
             conn.close();
             System.out.println("Dato insertado");
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException | NullPointerException e) {
+            System.out.println("error:" + e);
         }
     }
 
