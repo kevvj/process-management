@@ -1,4 +1,6 @@
 import java.util.Scanner;
+
+import view.MainView;
 public class Controller {
 
     processes p;
@@ -7,6 +9,11 @@ public class Controller {
     public Controller() {
         p = new processes();
         db = new DBConnection();
+    }
+
+    public void vista(){
+        MainView view = new MainView();
+        view.Inicialize();
     }
     
     @SuppressWarnings("resource")
