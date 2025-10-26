@@ -17,8 +17,43 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 
 public class MainView extends JFrame {
+
+    JButton button;
+    JTextField name;
+    JTextField num;
+    JTable table;
+
+    String[] columnas = {"PID", "Nombre", "Usuario", "Descripción", "prioridad"};
+    Object[][] datos = {};
+
+    DefaultTableModel model = new DefaultTableModel(datos, columnas);
+
+    public MainView() {
+        button = new JButton("Enviar");
+        name = new JTextField(10);
+        num = new JTextField(5);
+        
+        table = new JTable(model);
+    }
+
+    public JButton getButton() {
+        return button;
+    }
+
+    public JTextField getNameField() {
+        return name;
+    }
+
+    public JTextField getNumField() {
+        return num;
+    }
+
+    public DefaultTableModel getTable(){
+        return model;
+    }
 
     public void Inicialize() {
         setTitle("");
@@ -42,7 +77,7 @@ public class MainView extends JFrame {
 
         JPanel panel = new JPanel();
         panel.add(new JLabel("Nombre del catalogo:"));
-        panel.add(new JTextField(10));
+        panel.add(name);
         panel.setBackground(Color.WHITE);
         panel.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
@@ -50,13 +85,11 @@ public class MainView extends JFrame {
 
         JPanel panel1 = new JPanel();
         panel1.add(new JLabel("Numero de procesos a capturar:"));
-        panel1.add(new JTextField(5));
+        panel1.add(num);
         panel1.setBackground(Color.WHITE);
         panel1.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
         container.add(panel1);
-
-        JButton button = new JButton("Enviar");
 
         panel.setMaximumSize(panel.getPreferredSize());
         panel1.setMaximumSize(panel1.getPreferredSize());
@@ -76,30 +109,22 @@ public class MainView extends JFrame {
         panel2.setBackground(Color.red);
         panel2.setLayout(new BorderLayout());
         panel2.setMaximumSize(container.getMaximumSize());
-        
+
         root.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        JLabel tablelabel = new JLabel("__________________________Tabla de procesos_______________________");
+        JLabel tablelabel = new JLabel("_________________________Tabla de procesos________________________");
         tablelabel.setFont(new Font("Arial", Font.BOLD, 15));
         tablelabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
 
         root.add(tablelabel);
 
-        String[] columnas = {"PID", "Nombre", "Usuario", "Descripción", "prioridad"};
-        Object[][] datos = {
-            {"", "", "", "", ""},
-        };
+        table.setDefaultEditor(Object.class, null);
 
-        JTable tabla = new JTable(datos, columnas);
-        tabla.setDefaultEditor(Object.class, null);
-
-        JScrollPane scroll = new JScrollPane(tabla);
+        JScrollPane scroll = new JScrollPane(table);
 
         root.add(Box.createRigidArea(new Dimension(0, 20)));
         root.add(scroll);
         root.add(Box.createRigidArea(new Dimension(0, 10)));
-       
 
         root.setBackground(Color.WHITE);
         add(root, BorderLayout.CENTER);
