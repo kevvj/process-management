@@ -26,5 +26,8 @@ public class Controller {
             System.out.println(cap_.getProcess());
         }
 
+        DBConnection db = new DBConnection();
+        db.createProcess("ejemplo", "userejemplo", 123, "aaaa", 0);
+
     }
 }
