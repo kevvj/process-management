@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 
 import view.MainView;
 
-public class Controller {
+public class controller {
 
     processes p;
     DBConnection db;
