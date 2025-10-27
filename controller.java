@@ -18,7 +18,7 @@ public class controller {
     JTextField numField;
     DefaultTableModel model;
 
-    public Controller() {
+    public controller() {
         p = new processes();
         db = new DBConnection();
         view = new MainView();
